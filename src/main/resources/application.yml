@@ -1,22 +1,47 @@
 server:
   port: 8080
+#spring:
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/db_auth2?useSSL=false
+#    username: root
+#    password: password
+#    driver-class-name: com.mysql.jdbc.Driver
+#    tomcat:
+#      test-while-idle: true
+#      validation-query: SELECT 1
+#    initialization-mode: never
+#    platform: mysql
+#  jpa:
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL5Dialect
+#    hibernate:
+#      naming:
+#        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+#      ddl-auto: validate
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/db_oauth2?useSSL=false
-    username: root
-    password: 123456
-    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:postgresql://localhost:5432/auth_service?currentSchema=db_auth
+    name: auth_service
+    username: postgres
+    password: anhphuc1996
+    driver-class-name: org.postgresql.Driver
     tomcat:
-      test-while-idle: true
-      validation-query: SELECT 1
-    initialization-mode: never
-    platform: mysql
+      max-wait: 10000
+      max-active: 50
+      test-on-borrow: true
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    openInView: false
+    show_sql: true
+    generate-ddl: false
     hibernate:
-      naming:
-        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
-      ddl-auto: validate
+      ddl-auto: none
+      naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+    properties:
+      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+      hibernate.cache.region.factory_class: org.hibernate.cache.internal.NoCachingRegionFactory
+      hibernate.jdbc.lob.non_contextual_creation: true
 check-user-scopes: true

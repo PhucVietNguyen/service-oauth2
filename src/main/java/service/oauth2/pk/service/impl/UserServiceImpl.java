@@ -17,9 +17,9 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        UserEntity user = userRepository.findByUserName(userName);
+        UserEntity user = userRepository.findByUsername(username);
         if (user == null)
             throw new BadCredentialsException("Bad credentials");
         new AccountStatusUserDetailsChecker().check(user);

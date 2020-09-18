@@ -1,19 +1,17 @@
 package service.oauth2.pk.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "permission")
+@Table(name = "permission", schema = "db_auth")
 public class PermissionEntity implements Serializable {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "id")
+    @GeneratedValue(generator = "db_auth.permission_id_seq")
     private Integer id;
-    @Column(name = "NAME")
+    @Column(name = "name")
     private String name;
 
     public PermissionEntity() {

@@ -5,13 +5,14 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name = "role")
+@Table(name = "role", schema = "db_auth")
 public class RoleEntity implements Serializable {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "id")
+    @GeneratedValue(generator = "db_auth.role_id_seq")
     private Integer id;
-    @Column(name = "NAME")
+    @Column(name = "name")
     private String name;
 
     @ManyToMany(fetch = FetchType.EAGER)

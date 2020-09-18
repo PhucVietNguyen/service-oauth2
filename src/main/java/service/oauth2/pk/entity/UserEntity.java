@@ -11,25 +11,26 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user", schema = "db_auth")
 public class UserEntity implements Serializable, UserDetails {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "id")
+    @GeneratedValue(generator = "db_auth.user_id_seq")
     private Integer id;
-    @Column(name = "USERNAME")
-    private String userName;
-    @Column(name = "PASSWORD")
+    @Column(name = "username")
+    private String username;
+    @Column(name = "password")
     private String password;
-    @Column(name = "EMAIL")
+    @Column(name = "email")
     private String email;
-    @Column(name = "ENABLED")
+    @Column(name = "enabled")
     private Boolean enable;
-    @Column(name = "ACCOUNT_EXPIRED")
+    @Column(name = "account_expired")
     private Boolean accountExpired;
-    @Column(name = "CREDENTIALS_EXPIRED")
+    @Column(name = "credentials_expired")
     private Boolean credentialsExpired;
-    @Column(name = "ACCOUNT_LOCKED")
+    @Column(name = "account_locked")
     private Boolean accountLocked;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -49,12 +50,16 @@ public class UserEntity implements Serializable, UserDetails {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public Set<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleEntity> roles) {
+        this.roles = roles;
     }
 
     @Override
@@ -75,7 +80,7 @@ public class UserEntity implements Serializable, UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     @Override
